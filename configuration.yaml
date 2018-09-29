@@ -1,0 +1,165 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 41
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/Los_Angeles
+  # Customization file
+  customize: !include customize.yaml
+
+# Show links to resources in log and frontend
+#introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+mqtt:
+  broker: 127.0.0.1
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  # api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  # base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Weather prediction
+sensor:
+  - platform: yr
+  
+# sensor:
+  - platform: mqtt
+    state_topic: 'homeassist/sensors/livingroom'
+    name: 'living room temp'
+    unit_of_measurement: '°F'
+    value_template: '{{ value_json.fahrenheit }}'
+    
+  - platform: mqtt
+    state_topic: 'homeassist/sensors/livingroom'
+    name: 'Living room Humidity'
+    unit_of_measurement: '%'
+    value_template: '{{ value_json.humidity }}'
+    
+  - platform: mqtt
+    state_topic: 'homeassist/sensors/livingroom'
+    name: 'Living room Pressure'
+    unit_of_measurement: 'mbar'
+    value_template: '{{ value_json.pressure }}'       
+    
+  - platform: mqtt
+    state_topic: 'homeassist/sensors/bedroom'
+    name: 'Bedroom temp'
+    unit_of_measurement: '°F'
+    value_template: '{{ value_json.fahrenheit }}'
+    
+  - platform: mqtt
+    state_topic: 'homeassist/sensors/bedroom'
+    name: 'Bedroom Humidity'
+    unit_of_measurement: '%'
+    value_template: '{{ value_json.humidity }}'
+    
+  - platform: mqtt
+    state_topic: 'homeassist/sensors/bedroom'
+    name: 'Bedroom Pressure'
+    unit_of_measurement: 'mbar'
+    value_template: '{{ value_json.pressure }}'       
+    
+  - platform: rest
+    name: 'Outside Temp'
+    resource: !secret darkskyurl 
+    value_template: '{{ value_json.currently.temperature }}'
+    scan_interval: 120
+    headers:
+      User-Agent: Home Assistant
+      Content-Type: application/json
+    method: GET
+    unit_of_measurement: '°F'
+
+
+# Text to speech
+tts:
+  - platform: google
+
+# Cloud
+cloud:
+
+light:
+  - platform: mqtt
+    name: Test Light
+    command_topic: "homeassist/lights/light1/control"
+    state_topic: "homeassist/lights/light1/status"
+    state_topic_template: "{{ power }}"
+    qos: 0
+    payload_on: "on"
+    payload_off: "off"
+
+switch:
+  - platform: mqtt
+    name: Upstairs Fireplace
+    command_topic: "homeassist/fireplace/upstairs/control"
+    state_topic: "homeassist/fireplace/upstairs/status"
+    state_topic_template: "{{ power }}"
+    qos: 0
+    payload_on: "on"
+    payload_off: "off"
+
+input_number:
+  fireplace_timer:
+    name: Fireplace Timer
+    min: 1
+    max: 90
+    step: 1
+    unit_of_measurement: minute
+    icon: mdi:clock
+
+automation:
+  - alias: Fireplace slider moved
+    trigger:
+      platform: state
+      entity_id: input_number.fireplace_timer
+    action:
+      - service: mqtt.publish
+        data_template:
+          topic: "homeassist/fireplace/upstairs/timer"
+          retain: true
+          payload: '{{ states.input_number.fireplace_timer.state | int }}'
+
+    
+group: !include groups.yaml
+# automation: !include automations.yaml
+script: !include scripts.yaml
