@@ -2,4 +2,6 @@ secrets.yaml
 .storage
 .cloud
 plex.conf
-home-assistant_v2.db
+*.db
+*.log
+*.conf

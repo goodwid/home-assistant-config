@@ -1,2 +1,26 @@
 2018-09-29 13:46:55 ERROR (MainThread) [homeassistant.core] Timer got out of sync. Resetting
 2018-09-29 13:46:58 WARNING (SyncWorker_4) [netdisco.ssdp] Found malformed XML at http://192.168.1.163:9080: status=ok
+2018-09-29 15:15:55 ERROR (SyncWorker_1) [homeassistant.util.yaml] while parsing a block collection
+  in "/config/sensors.yaml", line 2, column 5
+expected <block end>, but found '?'
+  in "/config/sensors.yaml", line 3, column 5
+2018-09-29 15:15:55 ERROR (MainThread) [homeassistant.components] while parsing a block collection
+  in "/config/sensors.yaml", line 2, column 5
+expected <block end>, but found '?'
+  in "/config/sensors.yaml", line 3, column 5
+2018-09-29 15:16:13 ERROR (SyncWorker_15) [homeassistant.util.yaml] while parsing a block collection
+  in "/config/sensors.yaml", line 2, column 5
+expected <block end>, but found '?'
+  in "/config/sensors.yaml", line 3, column 5
+2018-09-29 15:16:28 ERROR (SyncWorker_3) [homeassistant.util.yaml] YAML file /config/configuration.yaml contains duplicate key "script". Check lines 118 and 119.
+2018-09-29 15:16:34 ERROR (SyncWorker_14) [homeassistant.util.yaml] YAML file /config/configuration.yaml contains duplicate key "script". Check lines 118 and 119.
+2018-09-29 15:18:33 ERROR (SyncWorker_0) [homeassistant.util.yaml] YAML file /config/configuration.yaml contains duplicate key "script". Check lines 64 and 119.
+2018-09-29 15:19:04 ERROR (SyncWorker_19) [homeassistant.util.yaml] YAML file /config/configuration.yaml contains duplicate key "script". Check lines 64 and 117.
+2018-09-29 15:19:13 ERROR (SyncWorker_18) [homeassistant.util.yaml] YAML file /config/configuration.yaml contains duplicate key "script". Check lines 64 and 117.
+2018-09-29 15:19:13 WARNING (MainThread) [homeassistant.components.group] remove:Group 'all_scripts' doesn't exist!
+2018-09-29 15:19:14 ERROR (SyncWorker_10) [homeassistant.util.yaml] YAML file /config/configuration.yaml contains duplicate key "script". Check lines 64 and 117.
+2018-09-29 15:19:16 ERROR (SyncWorker_12) [homeassistant.util.yaml] YAML file /config/configuration.yaml contains duplicate key "script". Check lines 64 and 117.
+2018-09-29 15:20:08 ERROR (MainThread) [homeassistant.components.hassio] INFO:homeassistant.util.package:Attempting install of colorlog==3.1.4
+Testing configuration at /config
+ERROR:homeassistant.util.yaml:YAML file /config/configuration.yaml contains duplicate key "script". Check lines 64 and 117.
+
