@@ -1,47 +1,58 @@
-sensor:
-  - platform: mqtt
-    state_topic: 'homeassist/sensors/livingroom'
-    name: 'living room temp'
-    unit_of_measurement: '°F'
-    value_template: '{{ value_json.fahrenheit }}'
-    
-  - platform: mqtt
-    state_topic: 'homeassist/sensors/livingroom'
-    name: 'Living room Humidity'
-    unit_of_measurement: '%'
-    value_template: '{{ value_json.humidity }}'
-    
-  - platform: mqtt
-    state_topic: 'homeassist/sensors/livingroom'
-    name: 'Living room Pressure'
-    unit_of_measurement: 'mbar'
-    value_template: '{{ value_json.pressure }}'       
-    
-  - platform: mqtt
-    state_topic: 'homeassist/sensors/bedroom'
-    name: 'Bedroom temp'
-    unit_of_measurement: '°F'
-    value_template: '{{ value_json.fahrenheit }}'
-    
-  - platform: mqtt
-    state_topic: 'homeassist/sensors/bedroom'
-    name: 'Bedroom Humidity'
-    unit_of_measurement: '%'
-    value_template: '{{ value_json.humidity }}'
-    
-  - platform: mqtt
-    state_topic: 'homeassist/sensors/bedroom'
-    name: 'Bedroom Pressure'
-    unit_of_measurement: 'mbar'
-    value_template: '{{ value_json.pressure }}'       
-    
-  - platform: rest
-    name: 'Outside Temp'
-    resource: !secret darkskyurl 
-    value_template: '{{ value_json.currently.temperature }}'
-    scan_interval: 120
-    headers:
-      User-Agent: Home Assistant
-      Content-Type: application/json
-    method: GET
-    unit_of_measurement: '°F'
+- platform: yr
+
+- platform: mqtt
+  state_topic: 'homeassist/sensors/livingroom'
+  name: 'living room temp'
+  unit_of_measurement: '°F'
+  value_template: '{{ value_json.fahrenheit }}'
+  
+- platform: mqtt
+  state_topic: 'homeassist/sensors/livingroom'
+  name: 'Living room Humidity'
+  unit_of_measurement: '%'
+  value_template: '{{ value_json.humidity }}'
+  
+- platform: mqtt
+  state_topic: 'homeassist/sensors/livingroom'
+  name: 'Living room Pressure'
+  unit_of_measurement: 'mbar'
+  value_template: '{{ value_json.pressure }}'       
+  
+- platform: mqtt
+  state_topic: 'homeassist/sensors/bedroom'
+  name: 'Bedroom temp'
+  unit_of_measurement: '°F'
+  value_template: '{{ value_json.fahrenheit }}'
+  
+- platform: mqtt
+  state_topic: 'homeassist/sensors/bedroom'
+  name: 'Bedroom Humidity'
+  unit_of_measurement: '%'
+  value_template: '{{ value_json.humidity }}'
+  
+- platform: mqtt
+  state_topic: 'homeassist/sensors/bedroom'
+  name: 'Bedroom Pressure'
+  unit_of_measurement: 'mbar'
+  value_template: '{{ value_json.pressure }}'       
+  
+# - platform: rest
+#  name: Dark Sky
+#  json_attributes:
+#    - temp
+#    - high
+#    - low
+#    - pressure
+#  resource: !secret darkskyurl 
+#  value_template: '{{ value_json.data }}'
+#  scan_interval: 120
+#  headers:
+#    User-Agent: Home Assistant
+#    Content-Type: application/json
+#  method: GET
+#- platform: template
+#  sensors:
+#    temp:
+#      friendly_name: 'Temperature'
+#      value_template: '{{ states.sensor.dark_sky.current.temperature }}'  
+#      unit_of_measurement: '°F'

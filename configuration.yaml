@@ -27,7 +27,8 @@ mqtt:
 
 http:
   # Secrets are defined in the file secrets.yaml
-  # api_password: !secret http_password
+  api_password: !secret http_password
+  server_port: !secret server_port
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   # base_url: example.duckdns.org:8123
 
@@ -55,22 +56,33 @@ logbook:
 # Enables a map showing the location of tracked devices
 map:
 
+ifttt:
+  key: !secret ifttt_apikey
+
 # Track the sun
 sun:
 
 # Weather prediction
-sensor:
-  - platform: yr
-
-script: !include sensors.yaml
+sensor: !include sensors.yaml
 
 # Text to speech
 tts:
-  - platform: google
+  - platform: google_translate
+    service_name: google_say
 
 # Cloud
-cloud:
-
+# cloud:
+  # alexa:
+  #   filter:
+  #     include_entities:
+  #       - switch.upstairs_fireplace
+  #     include_domains:
+  #       - switch
+  #   entity_config:
+  #     switch.upstairs_fireplace:
+  #       name: Fireplace
+  #       description: Upstairs fireplace
+      
 light:
   - platform: mqtt
     name: Test Light
@@ -81,36 +93,36 @@ light:
     payload_on: "on"
     payload_off: "off"
 
-switch:
-  - platform: mqtt
-    name: Upstairs Fireplace
-    command_topic: "homeassist/fireplace/upstairs/control"
-    state_topic: "homeassist/fireplace/upstairs/status"
-    state_topic_template: "{{ power }}"
-    qos: 0
-    payload_on: "on"
-    payload_off: "off"
+# switch:
+#   - platform: mqtt
+#     name: Upstairs Fireplace
+#     command_topic: "homeassist/fireplace/upstairs/control"
+#     state_topic: "homeassist/fireplace/upstairs/status"
+#     state_topic_template: "{{ power }}"
+#     qos: 0
+#     payload_on: "on"
+#     payload_off: "off"
 
-input_number:
-  fireplace_timer:
-    name: Fireplace Timer
-    min: 1
-    max: 90
-    step: 1
-    unit_of_measurement: minute
-    icon: mdi:clock
+# input_number:
+#   fireplace_timer:
+#     name: Fireplace Timer
+#     min: 1
+#     max: 90
+#     step: 1
+#     unit_of_measurement: minute
+#     icon: mdi:clock
 
-automation:
-  - alias: Fireplace slider moved
-    trigger:
-      platform: state
-      entity_id: input_number.fireplace_timer
-    action:
-      - service: mqtt.publish
-        data_template:
-          topic: "homeassist/fireplace/upstairs/timer"
-          retain: true
-          payload: '{{ states.input_number.fireplace_timer.state | int }}'
+# automation:
+#   - alias: Fireplace slider moved
+#     trigger:
+#       platform: state
+#       entity_id: input_number.fireplace_timer
+#     action:
+#       - service: mqtt.publish
+#         data_template:
+#           topic: "homeassist/fireplace/upstairs/timer"
+#           retain: true
+#           payload: '{{ states.input_number.fireplace_timer.state | int }}'
 
     
 group: !include groups.yaml
