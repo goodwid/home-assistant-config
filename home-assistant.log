@@ -1,13 +1,6 @@
-2019-05-04 18:06:13 WARNING (MainThread) [homeassistant.components.http] Configuring api_password via the http component has been deprecated. Use the legacy api password auth provider instead. For instructions, see https://www.home-assistant.io/docs/authentication/providers/#legacy-api-password
-2019-05-04 18:06:13 WARNING (MainThread) [homeassistant.components.http.auth] legacy_api_password support has been enabled.
-2019-05-04 18:06:15 WARNING (MainThread) [homeassistant.helpers.config_validation] Your configuration contains extra keys that the platform does not support.
-Please remove [state_topic_template].  (See /config/configuration.yaml, line 96). 
-2019-05-04 18:06:16 WARNING (MainThread) [homeassistant.helpers.config_validation] Your configuration contains extra keys that the platform does not support.
-Please remove [state_topic_template]. 
-2019-05-04 18:06:44 WARNING (SyncWorker_9) [plexapi] BadRequest (401) unauthorized http://192.168.1.41:32400/; <html><head><script>window.location = window.location.href.match(/(^.+\/)[^\/]*$/)[1] + 'web/index.html';</script><title>Unauthorized</title></head><body><h1>401 Unauthorized</h1></body></html>
-2019-05-04 18:18:53 ERROR (Thread-2) [homeassistant.components.mqtt] Unable to connect to the MQTT broker: Connection Refused: not authorised.
-2019-05-04 18:54:55 WARNING (MainThread) [homeassistant.components.http] Configuring api_password via the http component has been deprecated. Use the legacy api password auth provider instead. For instructions, see https://www.home-assistant.io/docs/authentication/providers/#legacy-api-password
-2019-05-04 18:54:55 WARNING (MainThread) [homeassistant.helpers.config_validation] Your configuration contains extra keys that the platform does not support.
-Please remove [state_topic_template]. 
-2019-05-04 18:54:55 WARNING (MainThread) [homeassistant.helpers.config_validation] Your configuration contains extra keys that the platform does not support.
-Please remove [state_topic_template]. 
+2020-12-04 07:43:11 WARNING (Recorder) [homeassistant.components.recorder] Ended unfinished session (id=80 from 2020-12-04 15:35:16.102437)
+2020-12-04 08:01:49 WARNING (MainThread) [homeassistant.components.http.ban] Login attempt or request with invalid authentication from 192.168.1.101
+2020-12-04 08:01:56 WARNING (MainThread) [homeassistant.components.http.ban] Login attempt or request with invalid authentication from 192.168.1.101
+2020-12-04 08:02:41 WARNING (MainThread) [homeassistant.components.http.ban] Login attempt or request with invalid authentication from 192.168.1.101
+2020-12-04 08:02:49 WARNING (MainThread) [homeassistant.components.http.ban] Login attempt or request with invalid authentication from 192.168.1.101
+2020-12-04 08:02:54 WARNING (MainThread) [homeassistant.components.http.ban] Login attempt or request with invalid authentication from 192.168.1.101
